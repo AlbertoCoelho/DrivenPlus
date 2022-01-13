@@ -43,7 +43,7 @@ export const AuthProvider = ( {children} ) => {
       api.defaults.headers.Authorization = `Bearer ${token}`;
       
       setUser(loggedUser);
-      navigate("/hoje");
+      navigate("/subscriptions");
     } catch (err) {
         console.log(err.msg);
         alert("Usuário não cadastrado, faça seu cadastro.");
@@ -109,7 +109,7 @@ export const AuthProvider = ( {children} ) => {
   }
 
   return (
-    <AuthContext.Provider value= { {authenticated: !!user, user, loading, login, logout, signup } }>
+    <AuthContext.Provider value= { {authenticated: !!user, user, loading, login, logout,signup } }>
       {children}
     </AuthContext.Provider>
   );

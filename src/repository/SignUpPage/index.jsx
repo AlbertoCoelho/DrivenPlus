@@ -1,15 +1,25 @@
-import React, { useState, useContext } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 import { Wrapper, Container, StyledLink } from './style';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import Loading from '../../components/Loading';
 
-import { AuthContext } from '../../contexts/auth';
+import axios from 'axios';
+import { createUser } from '../../services/api';
+
+/* 
+If you don't want to use an asynchronous function to create a user, just follow these simple steps:
+
+1) Delete the SignUp folder located at src/pages/SignUp.
+2) Copy this page into the pages folder located at src/pages.
+3) Enter the auth.jsx file in the contexts folder and completely delete the signup function. Still in the auth.jsx file, in the return of the AuthProvider component, remove the signup from the value.
+
+Happy hacking! 
+*/
 
 const SignUpPage = () => {
-
-  const { signup } = useContext(AuthContext);
 
   const [isLoading, setIsLoading] = useState( {placeholder: "CADASTRAR", disabled: false} );
   const [ formData, setFormData ] = useState({
@@ -19,14 +29,31 @@ const SignUpPage = () => {
     password:""
   });
 
+  const navigate = useNavigate();
+
   const handleSignUp = (e) => {
     e.preventDefault();
 
-    signup(formData,isLoading,setIsLoading);
+    const promise = axios.post("https://mock-api.driven.com.br/api/v4/driven-plus/auth/sign-up", {
+      ...formData
+    })
 
     isLoading.placeholder = <Loading />
     isLoading.disabled = true;
     setIsLoading({...isLoading});
+
+    promise.then( response => {
+      console.log(response);
+      setIsLoading(false);
+      navigate("/")
+    })
+    promise.catch( () => {
+      alert("Por favor, preencha os dados corretamente");
+      isLoading.placeholder = "CADASTRAR";
+      isLoading.disabled = false;
+      setIsLoading({...isLoading});
+    })
+    
   } 
 
   function handleInputChange(e) {
@@ -66,7 +93,6 @@ return (
         />
         <Input
           type="text"
-          data-ls-module="charCounter" maxlength="11" 
           value={formData.cpf}
           onChange={handleInputChange}
           name="cpf"

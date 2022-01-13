@@ -57,7 +57,7 @@ strong {
 }
 a {
   color: inherit;
-  text-decoration: inherit;
+  //text-decoration: inherit;
 }
 * {
   box-sizing: border-box;

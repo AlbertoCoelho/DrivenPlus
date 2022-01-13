@@ -1,17 +1,19 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import GlobalStyle from "./styles/GlobalStyle";
 
-import LoginPage from "./pages/LoginPage";
-import SignUpPage from "./pages/SignUpPage"
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
+import Subscription from './pages/Subscription';
+import Plan from './pages/Plan';
 // import Today from "./pages/Today";
 // import Habits from "./pages/Habits";
 // import Historic from "./pages/Historic";
 
 
 import { AuthProvider, AuthContext } from './contexts/auth';
-// import { UserInformationProvider } from './contexts/userInformation';
+// import { DataProvider } from './contexts/data';
 
 const AppRoutes = () => {
 
@@ -32,16 +34,17 @@ const AppRoutes = () => {
   return (
   <Router>
     <AuthProvider>
-      {/* <UserInformationProvider> */}
+      {/* <DataProvider> */}
         <Routes>
-          <Route exact path="/" element={<LoginPage />} />
-          <Route exact path="/sign-up" element={ <SignUpPage /> } />
-          {/* <Route exact path="/hoje" element={ <Private> <Today /> </Private> } />
-          <Route exact path="/habitos" element={ <Private> <Habits /> </Private>} />
-          <Route exact path="/historico" element={<Private> <Historic /> </Private> } />  */}
+          <Route exact path="/" element={<Login />} />
+          <Route exact path="/sign-up" element={ <SignUp /> } />
+          <Route exact path="/subscriptions" element={ <Private> <Subscription /> </Private> } />
+          <Route exact path="/subscriptions/:ID_DO_PLANO" element={ <Private> < Plan/> </Private> } />
+          {/* <Route exact path="/habitos" element={ <Private> <Habits /> </Private>} />
+          <Route exact path="/historico" element={<Private> <Historic /> </Private> } /> */}
         </Routes> 
         <GlobalStyle />
-      {/* </UserInformationProvider> */}
+      {/* </DataProvider> */}
     </AuthProvider>
   </Router>
   );

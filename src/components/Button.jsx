@@ -14,6 +14,7 @@ const Button = styled.button`
   letter-spacing: 0em;
   color: #FFFFFF;
   text-align: center;
+  margin-top: 8px;
 
   padding: 14px;
   border-radius: 8px;
