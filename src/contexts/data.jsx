@@ -1,30 +1,29 @@
-// import React, { createContext, useState } from "react";
-// import { getPlans } from '../services/api';
+import React, { createContext } from "react";
+import { useNavigate } from "react-router";
+import { makeSignature } from '../services/api';
 
-// export const DataContext = createContext();
+export const DataContext = createContext();
 
-// export const DataProvider = ( {children} ) => {
+export const DataProvider = ( {children} ) => {
 
-//   const [userImage, setUserImage] = useState('');
-//   const [percentHabits, setPercentHabits] = useState(0); 
+  const navigate = useNavigate();
 
-//   const image = (email, password) => {
-//     const promise = getImage(email,password);
+  const signature = async (signatureData) => {
+    try{
+      const response = await makeSignature(signatureData);
+      console.log(signatureData);
+      console.log("signature", response.data);
+      navigate("/home");
+    } catch (e) {
+      console.log(e.response);
+      alert("Houve algum erro nos dados, por favor preencha-os novamente!");
+    }
     
-//     promise.then(response => { 
-//       console.log("function image: ", response.data.image);
-//       setUserImage(response.data.image);
-//     });
-  
-//     promise.catch( () => {
-//       console.log("Houve um erro");
-//     });
-//   }
-//   //console.log('userImage: ', userImage);
+  }
 
-//   return (
-//     <DataContext.Provider value= { { image, userImage, percentHabits, setPercentHabits } }>
-//     {children}
-//     </DataContext.Provider>
-//   );
-// }
+  return (
+    <DataContext.Provider value= { { signature } }>
+    {children}
+    </DataContext.Provider>
+  );
+}
