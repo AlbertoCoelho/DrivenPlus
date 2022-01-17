@@ -31,7 +31,7 @@ const Subscription = () => {
         {
           plans.map( (plan) => (
             <Button key={plan.id} onClick={() => navigate(`/subscriptions/${plan.id}`)} >
-              <img src={plan.image} alt="Image" />
+              <img src={plan.image} alt="Logo" />
               <h2>{`R$ ${plan.price}`}</h2>  
             </Button>       
           )) 

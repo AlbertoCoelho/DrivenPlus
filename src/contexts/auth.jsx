@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState,useRef } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from 'react-router';
 
 import { api, createSession, createUser } from '../services/api';
@@ -27,13 +27,8 @@ export const AuthProvider = ( {children} ) => {
   const login = async (email, password, isLoading, setIsLoading) => {
     try{
       const response = await createSession(email,password)
-      
-      console.log("login", response.data);
 
-      //Uma vez tendo a informação de email e password eu deveria ir numa API e criar uma section. Depois essa API vai retornar um usuário que terá o nosso id e o nosso email. Por enquanto vamos simular isso depois colocar a API.
-
-      /* Isso seria a resposta da minha section */
-      const loggedUser = response.data; // É como está na API dele.
+      const loggedUser = response.data;
       const token = response.data.token;
 
       
@@ -44,8 +39,7 @@ export const AuthProvider = ( {children} ) => {
       
       setUser(loggedUser);
       navigate("/subscriptions");
-    } catch (err) {
-        console.log(err.msg);
+    } catch{
         alert("Usuário não cadastrado, faça seu cadastro.");
         isLoading.placeholder = "ENTRAR";
         isLoading.disabled = false;
@@ -56,14 +50,9 @@ export const AuthProvider = ( {children} ) => {
   const signup = async (formData,isLoading,setIsLoading) => {
     try {
       const response = await createUser(formData);
-      console.log(formData);
-
-      console.log("signup",response.data);
       setIsLoading(false);
       navigate("/")
-    } catch (e) {
-      console.log(e.response);
-      console.log("catch", formData);
+    } catch{
       alert("Por favor, preencha os dados corretamente");
       isLoading.placeholder = "CADASTRAR";
       isLoading.disabled = false;
@@ -71,35 +60,7 @@ export const AuthProvider = ( {children} ) => {
     }
   }
 
-
-//   const SignupComponent = (formData,isLoading,setIsLoading) => {
-//     useEffect(() => {
-//       async function signup(formData){
-//         //Faça sua requisição aqui
-//         try {
-//           const response = await createUser(formData);
-//           console.log(formData);
-    
-//           console.log("signup",response.data);
-//           setIsLoading(false);
-//           navigate("/")
-//         } catch (e) {
-//           console.log(e);
-//           console.log("catch", formData);
-//           alert("Por favor, preencha os dados corretamente");
-//           isLoading.placeholder = "CADASTRAR";
-//           isLoading.disabled = false;
-//           setIsLoading({...isLoading});
-//         }
-//     }
-
-//     signup();
-// }, [])
-//   }
-
   const logout = () => {
-    console.log("logout"); 
-
     localStorage.remove("user");
     localStorage.remove("token");      
     api.defaults.headers.Authorization = null;

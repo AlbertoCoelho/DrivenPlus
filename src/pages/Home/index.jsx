@@ -1,13 +1,23 @@
 import { useLocation } from 'react-router-dom';
+import { useContext } from 'react';
+import { useNavigate } from "react-router-dom";
+
 import { Header, Container,Image,IconUser,Texto,Button,ButtonContainer,ButtonCancelPlan } from './style';
+
+import { DataContext } from '../../contexts/data';
 
 import { IconContext } from "react-icons";
 import {FaRegUserCircle} from "react-icons/fa";
 
 const Home = () => {
 
+  const navigate = useNavigate();
+  const { deletesig } = useContext(DataContext);
   const {image,perks} = useLocation().state;
 
+  const handleDeleteSignature = () => {
+    deletesig();
+  }
 
   return (
     <>
@@ -23,11 +33,16 @@ const Home = () => {
         <Texto>
           Olá, fulano
         </Texto>
-        <Button></Button>
-        <Button></Button>
+        {
+          perks.map( (item) => (
+            <Button key={item.id} onClick={()=> window.open(`${item.link}, "_blank" `)}>
+              {item.title}
+            </Button>
+          ))
+        }
         <ButtonContainer>
-          <Button></Button>
-          <ButtonCancelPlan></ButtonCancelPlan>
+          <Button onClick={() => navigate("/planos")}>Mudar plano</Button>
+          <ButtonCancelPlan onClick={() => handleDeleteSignature()}>Cancelar plano</ButtonCancelPlan>
         </ButtonContainer>
 
       </Container>

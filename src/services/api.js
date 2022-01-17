@@ -34,5 +34,10 @@ export const makeSignature = async (signatureData) => {
   return promise;
 }
 
+export const deleteSignature = async () => {
+  const promise = api.delete("/subscriptions")
+  return promise;
+}
+
 
 

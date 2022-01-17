@@ -61,6 +61,17 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  cursor: pointer;
+
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #FFFFFF;
 `
 
 const ButtonContainer = styled.div`
@@ -84,6 +95,17 @@ const ButtonCancelPlan = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  cursor: pointer;
+
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #FFFFFF;
 `
 
 export {

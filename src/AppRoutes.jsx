@@ -8,6 +8,7 @@ import SignUp from "./pages/SignUp";
 import Subscription from './pages/Subscription';
 import Plan from './pages/Plan';
 import Home from './pages/Home';
+import TelaDePlanos from './pages/TelaDePlanos';
 
 import { AuthProvider, AuthContext } from './contexts/auth';
 import { DataProvider } from './contexts/data';
@@ -38,6 +39,7 @@ const AppRoutes = () => {
           <Route exact path="/subscriptions" element={ <Private> <Subscription /> </Private> } />
           <Route exact path="/subscriptions/:ID_DO_PLANO" element={ <Private> < Plan/> </Private> } />
           <Route exact path="/home" element={<Private> <Home /> </Private> } />
+          <Route exact path="/planos" element={<Private> <TelaDePlanos /> </Private>} />
         </Routes> 
         <GlobalStyle />
       </DataProvider>

@@ -12,7 +12,6 @@ import { AuthContext } from '../../contexts/auth'
 const LoginPage = () => {
 
   const { login } = useContext(AuthContext);
-  //const { image } = useContext(userInformationContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,10 +19,8 @@ const LoginPage = () => {
   
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log('submit', { email, password });
 
     login(email,password,isLoading,setIsLoading);
-    //image(email,password);
 
     isLoading.placeholder = <Loading/>
     isLoading.disabled = true;
