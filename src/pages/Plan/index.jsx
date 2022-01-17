@@ -74,7 +74,7 @@ const Plan = () => {
               {
                 plan.perks.map( (item) => (
                   <li key={item.id}>
-                    {item.id}. {item.title}
+                    {plan.perks.indexOf(item) + 1}. {item.title}
                   </li>
                 ))
               }
